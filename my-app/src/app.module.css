@@ -1,0 +1,179 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: rgb(42, 38, 129);
+	background: linear-gradient(-120deg, #021b79, #0575e6, #205e9b);
+}
+
+.container {
+	margin: 0 auto;
+	width: 90vw;
+	height: 100vh;
+	display: flex;
+}
+
+.calculator-wrapper {
+	align-self: center;
+	margin: 0 auto;
+	min-width: 15vw;
+	max-width: 20vw;
+	min-height: 40vh;
+	max-height: 65vh;
+	background-color: rgba(26, 32, 52, 0.993);
+	border-radius: 7px;
+	padding: 5px;
+	display: grid;
+	grid-template-areas:
+		'header header header'
+		'display display display'
+		'operands operands operators'
+		'operands operands operators';
+	gap: 5px;
+	grid-template-rows: 3vh 10vh;
+}
+
+.header {
+	color: rgb(255, 255, 255);
+	grid-area: header;
+	font-size: 1.2rem;
+}
+
+.display {
+	font-weight: 600;
+	grid-area: display;
+	justify-self: end;
+	align-self: center;
+	margin-right: 5px;
+	max-width: 100%;
+}
+
+.preview {
+	font-size: 1.5rem;
+	color: rgb(150, 153, 161);
+	display: flex;
+	justify-content: end;
+}
+
+.result {
+	font-size: 3rem;
+	color: rgb(150, 153, 161);
+	display: flex;
+	justify-content: end;
+}
+
+.active {
+	color: rgb(255, 255, 255);
+}
+
+.operands {
+	grid-area: operands;
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 7px;
+	gap: 5px;
+}
+
+.operand-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border: none;
+	border-radius: 7px;
+	font-size: 1.4rem;
+	color: rgb(255, 255, 255);
+	background-color: rgb(54, 58, 78);
+	width: 48.5%;
+}
+
+.operand-button:hover {
+	background-color: rgb(45, 49, 70);
+}
+
+.operand-button:active {
+	background-color: rgb(39, 44, 63);
+}
+
+.operators {
+	grid-area: operators;
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 7px;
+	justify-content: end;
+	gap: 5px;
+}
+
+.operator-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 7px;
+	cursor: pointer;
+	border: none;
+	font-size: 1.4rem;
+	color: rgb(255, 255, 255);
+	background-color: rgb(45, 49, 70);
+	width: 100%;
+}
+
+.operator-button:hover {
+	background-color: rgb(54, 58, 78);
+}
+
+.operator-button:active {
+	background-color: rgb(45, 49, 70);
+}
+
+@media (max-width: 1980px) {
+	.calculator-wrapper {
+		min-width: 17vw;
+		max-width: 20vw;
+		min-height: 50vh;
+		max-height: 65vh;
+	}
+	.preview {
+		font-size: 1rem;
+	}
+
+	.result {
+		font-size: 2.5rem;
+	}
+	.header {
+		font-size: 1rem;
+	}
+	.operand-button {
+		font-size: 1.2rem;
+	}
+
+	.operator-button {
+		font-size: 1.2rem;
+	}
+}
+
+@media (max-width: 1565px) {
+	.calculator-wrapper {
+		min-width: 25vw;
+	}
+}
+
+@media (max-width: 1000px) {
+	.calculator-wrapper {
+		min-width: 40vw;
+	}
+}
+
+@media (max-width: 626px) {
+	.calculator-wrapper {
+		min-width: 65vw;
+	}
+}
+
+@media (max-width: 400px) {
+	.calculator-wrapper {
+		min-width: 90vw;
+	}
+}
