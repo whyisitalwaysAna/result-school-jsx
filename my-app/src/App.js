@@ -1,130 +1,131 @@
-/* eslint-disable default-case */
-import styles from './app.module.css';
+import s from './app.module.css';
 import { useState } from 'react';
 
 export const App = () => {
-	const operands = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-	const operators = ['C', '-', '+', '='];
 	const [result, setResult] = useState('0');
 	const [operand_1, setOperand_1] = useState('');
 	const [operator, setOperator] = useState('');
 	const [operand_2, setOperand_2] = useState('');
-	const [flagForEqual, setFlagForEqual] = useState(false);
+	const [equal, setEqual] = useState(false);
 
-	function getOperand(event) {
-		const currentOperand = event.target.textContent;
+	const keys = [
+		{ id: '1', value: '1', group: 'operand', handler: handleOperand },
+		{ id: '2', value: '2', group: 'operand', handler: handleOperand },
+		{ id: '3', value: '3', group: 'operand', handler: handleOperand },
+		{ id: '4', value: '4', group: 'operand', handler: handleOperand },
+		{ id: '5', value: '5', group: 'operand', handler: handleOperand },
+		{ id: '6', value: '6', group: 'operand', handler: handleOperand },
+		{ id: '7', value: '7', group: 'operand', handler: handleOperand },
+		{ id: '8', value: '8', group: 'operand', handler: handleOperand },
+		{ id: '9', value: '9', group: 'operand', handler: handleOperand },
+		{ id: '0', value: '0', group: 'operand', handler: handleOperand },
+		{ id: 'С', value: 'С', group: 'operator', handler: handleOperator },
+		{ id: '-', value: '-', group: 'operator', handler: handleOperator },
+		{ id: '+', value: '+', group: 'operator', handler: handleOperator },
+		{ id: '=', value: '=', group: 'operator', handler: handleOperator },
+	];
 
-		if (currentOperand === '0') {
-			if (operand_1 === '') return null;
-			if (operand_2 === '') return null;
+	function handleOperand(target) {
+		if (target === '0') {
+			if (!operand_1) return;
+			if (!operand_2) return;
 		}
 
-		if (flagForEqual === true) {
-			return null;
+		if (equal) return;
+
+		if (operator) {
+			if (operand_2.length === 10) return;
+
+			setOperand_2((prev) => prev + target);
 		}
 
-		if (operator === '') {
-			if (operand_1.length === 10) return null;
+		if (!operator) {
+			if (operand_1.length === 10) return;
 
-			setOperand_1((prev) => {
-				return prev + currentOperand;
-			});
-		}
-
-		if (operator !== '') {
-			if (operand_2.length === 10) return null;
-
-			setOperand_2((prev) => {
-				return prev + currentOperand;
-			});
+			setOperand_1((prev) => prev + target);
 		}
 	}
 
-	function getOperator(event) {
-		const currentOperator = event.target.textContent;
-		if (operand_1 === '') return null;
+	function handleOperator(target) {
+		if (!operand_1) return;
 
-		switch (currentOperator) {
+		switch (target) {
 			case '=':
-				if (operand_2 === '') return null;
-				setFlagForEqual(true);
+				if (!operand_2) return;
+				setEqual(true);
 				return calcResult(operator);
-			case 'C':
+			case 'С':
 				setOperand_1('');
 				setOperator('');
 				setOperand_2('');
 				setResult('0');
-				setFlagForEqual(false);
-				return null;
+				setEqual(false);
+				return;
+			default: //nothing
 		}
 
 		if (result !== '0') {
 			setOperand_1(result);
 			setOperand_2('');
-			setOperator(currentOperator);
+			setOperator(target);
 		}
 
-		setFlagForEqual(false);
-		setOperator(currentOperator);
+		setEqual(false);
+		setOperator(target);
 	}
 
 	function calcResult(action) {
 		switch (action) {
 			case '+':
-				if (flagForEqual === true)
-					return setResult((+result + +operand_2).toFixed(0));
-				return setResult((+operand_1 + +operand_2).toFixed(0));
+				if (equal) return setResult(+result + +operand_2);
+				return setResult(+operand_1 + +operand_2);
 			case '-':
-				if (flagForEqual === true)
-					return setResult((+result - +operand_2).toFixed(0));
-				return setResult((+operand_1 - +operand_2).toFixed(0));
+				if (equal) return setResult(+result - +operand_2);
+				return setResult(+operand_1 - +operand_2);
+			default: //nothing
 		}
 	}
 
 	return (
-		<div className={styles.container}>
-			<section className={styles['calculator-wrapper']}>
-				<header className={styles.header}>&#128290; Calculator</header>
-				<div className={styles.display}>
-					<div className={styles.preview}>
+		<div className={s.container}>
+			<section className={s.calculatorWrapper}>
+				<header className={s.header}>&#128290; Calculator</header>
+				<div className={s.display}>
+					<div className={s.preview}>
 						&nbsp;{operand_1} {operator} {operand_2}
-						{flagForEqual ? ' =' : null}
+						{equal ? ' =' : null}
 					</div>
-					<div
-						className={
-							flagForEqual
-								? styles.result + ' ' + styles.active
-								: styles.result
-						}
-					>
+					<div className={equal ? `${s.result} ${s.active}` : s.result}>
 						{result}
 					</div>
 				</div>
-				<div className={styles.operands}>
-					{operands.reverse().map((oper) => {
-						return (
-							<button
-								key={oper}
-								className={styles['operand-button']}
-								onClick={(e) => getOperand(e)}
-							>
-								{oper}
-							</button>
-						);
-					})}
+				<div className={s.operands}>
+					{keys.map(
+						({ id, value, group, handler }) =>
+							group === 'operand' && (
+								<button
+									key={id}
+									className={s.operandButton}
+									onClick={() => handler(value)}
+								>
+									{value}
+								</button>
+							),
+					)}
 				</div>
-				<div className={styles.operators}>
-					{operators.map((oper) => {
-						return (
-							<button
-								key={oper}
-								className={styles['operator-button']}
-								onClick={(e) => getOperator(e)}
-							>
-								{oper}
-							</button>
-						);
-					})}
+				<div className={s.operators}>
+					{keys.map(
+						({ id, value, group, handler }) =>
+							group === 'operator' && (
+								<button
+									key={id}
+									className={s.operatorButton}
+									onClick={() => handler(value)}
+								>
+									{value}
+								</button>
+							),
+					)}
 				</div>
 			</section>
 		</div>
