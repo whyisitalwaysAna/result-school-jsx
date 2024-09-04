@@ -1,23 +1,31 @@
-export function handleOperand(
-	{ equal, operandLeft, setOperandLeft, operator, operandRight, setOperandRight },
-	value,
-) {
-	if (value === '0') {
-		if (!operandLeft) return;
-		if (!operandRight) return;
-	}
+function validateOperand(operand, value) {
+	if (operand.length === 10) return false;
 
-	if (equal) return;
+	if (value === '0' && !operand) return false;
 
-	if (operator) {
-		if (operandRight.length === 10) return;
+	return true;
+}
 
-		setOperandRight((prev) => prev + value);
-	}
+export function handleOperand(state, setState, value) {
+	if (state.equal) return;
 
-	if (!operator) {
-		if (operandLeft.length === 10) return;
+	setState((prev) => {
+		const { operandLeft, operator, operandRight } = prev;
 
-		setOperandLeft((prev) => prev + value);
-	}
+		if (operator && validateOperand(operandRight, value)) {
+			return {
+				...prev,
+				operandRight: operandRight + value,
+			};
+		}
+
+		if (!operator && validateOperand(operandLeft, value)) {
+			return {
+				...prev,
+				operandLeft: operandLeft + value,
+			};
+		}
+
+		return { ...prev };
+	});
 }
