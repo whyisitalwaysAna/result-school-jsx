@@ -3,26 +3,15 @@ import { useState } from 'react';
 import { getKeys } from './get-keys';
 
 export const App = () => {
-	const [equal, setEqual] = useState(false);
-	const [result, setResult] = useState('0');
-	const [operandLeft, setOperandLeft] = useState('');
-	const [operator, setOperator] = useState('');
-	const [operandRight, setOperandRight] = useState('');
+	const [state, setState] = useState({
+		result: '0',
+		operandLeft: '',
+		operandRight: '',
+		operator: '',
+		equal: false,
+	});
 
-	const state = {
-		equal,
-		setEqual,
-		result,
-		setResult,
-		operandLeft,
-		setOperandLeft,
-		operator,
-		setOperator,
-		operandRight,
-		setOperandRight,
-	};
-
-	const keys = getKeys(state);
+	const keys = getKeys(state, setState);
 
 	return (
 		<div className={s.container}>
@@ -30,11 +19,11 @@ export const App = () => {
 				<header className={s.header}>&#128290; Calculator</header>
 				<div className={s.display}>
 					<div className={s.preview}>
-						&nbsp;{operandLeft} {operator} {operandRight}
-						{equal ? ' =' : null}
+						&nbsp;{state.operandLeft} {state.operator} {state.operandRight}
+						{state.equal ? ' =' : null}
 					</div>
-					<div className={equal ? `${s.result} ${s.active}` : s.result}>
-						{result}
+					<div className={state.equal ? `${s.result} ${s.active}` : s.result}>
+						{state.result}
 					</div>
 				</div>
 				<div className={s.operands}>

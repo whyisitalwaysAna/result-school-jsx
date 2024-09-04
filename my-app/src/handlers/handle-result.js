@@ -1,11 +1,33 @@
-export function handleResult(equal, result, setResult, operandLeft, operator, operandRight) {
-	switch (operator) {
+export function handleResult(state, setState, value) {
+	switch (state.operator) {
 		case '+':
-			if (equal) return setResult(+result + +operandRight);
-			return setResult(+operandLeft + +operandRight);
+			if (state.equal)
+				return setState((prev) => {
+					return {
+						...prev,
+						result: +state.result + +state.operandRight,
+					};
+				});
+			return setState((prev) => {
+				return {
+					...prev,
+					result: +state.operandLeft + +state.operandRight,
+				};
+			});
 		case '-':
-			if (equal) return setResult(+result - +operandRight);
-			return setResult(+operandLeft - +operandRight);
+			if (state.equal)
+				return setState((prev) => {
+					return {
+						...prev,
+						result: +state.result - +state.operandRight,
+					};
+				});
+			return setState((prev) => {
+				return {
+					...prev,
+					result: +state.operandLeft - +state.operandRight,
+				};
+			});
 		default: //nothing
 	}
 }
