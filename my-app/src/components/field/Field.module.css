@@ -78,6 +78,6 @@
 	top: 15%;
 	border-radius: 50%;
 	border: 20px solid #fff;
-	width: calc(100% / 1.5);
-	height: calc(100% / 1.5);
+	width: 50%;
+	height: 50%;
 }
