@@ -1,11 +1,5 @@
-import s from './newGame.module.css';
-
-function NewGameContainer(state) {
-	state.setCurrentPlayer('x');
-	state.setIsGameEnded(false);
-	state.setIsDraw(false);
-	state.setField(state.fieldInitial);
-}
+import s from './NewGame.module.css';
+import { NewGameContainer } from './NewGameContainer';
 
 export const NewGameLayout = ({ ...state }) => {
 	return (
