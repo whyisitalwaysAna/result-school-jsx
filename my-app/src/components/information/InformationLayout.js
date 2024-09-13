@@ -1,17 +1,13 @@
 import s from './Information.module.css';
 
-function InformationConainer(currentPlayer, isGameEnded, isDraw) {
-	if (isDraw) return `Ничья!`;
+function InformationConainer(state) {
+	if (state.isDraw) return `Ничья!`;
 
-	return isGameEnded
-		? `Победитель: (${currentPlayer})!`
-		: `Ход игрока (${currentPlayer})`;
+	return state.isGameEnded
+		? `Победитель: (${state.currentPlayer})!`
+		: `Ход игрока (${state.currentPlayer})`;
 }
 
-export const InformationLayout = ({ currentPlayer, isGameEnded, isDraw }) => {
-	return (
-		<div className={s.header}>
-			{InformationConainer(currentPlayer, isGameEnded, isDraw)}
-		</div>
-	);
+export const InformationLayout = ({ ...state }) => {
+	return <div className={s.header}>{InformationConainer(state)}</div>;
 };

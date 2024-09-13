@@ -1,16 +1,6 @@
 import s from './Field.module.css';
 
-function FieldContainer(
-	field,
-	setField,
-	index,
-	currentPlayer,
-	setCurrentPlayer,
-	isGameEnded,
-	setIsGameEnded,
-	isDraw,
-	setIsDraw,
-) {
+function FieldContainer(state, index) {
 	const WIN_PATTERNS = [
 		[0, 1, 2],
 		[3, 4, 5],
@@ -22,19 +12,48 @@ function FieldContainer(
 		[2, 4, 6], // Варианты побед по диагонали
 	];
 
-	if (isGameEnded) return null;
-	if (isDraw) return null;
+	if (state.isGameEnded) return;
+	if (state.isDraw) return;
+	if (state.field[index].symbol) return;
 
-	function checkDraw() {
+	// Рендер Х и О по клику
+	state.setField((prev) => {
+		prev[index].symbol = state.currentPlayer;
+		return [...prev];
+	});
+
+	switch (state.currentPlayer) {
+		case 'x':
+			state.setCurrentPlayer((prev) => {
+				if (findWinner('x')) {
+					state.setIsGameEnded(true);
+					return prev;
+				}
+				return (prev = 'o');
+			});
+			break;
+		case 'o':
+			state.setCurrentPlayer((prev) => {
+				if (findWinner('o')) {
+					state.setIsGameEnded(true);
+					return prev;
+				}
+				return (prev = 'x');
+			});
+			break;
+		default: // Ничего не делаем
+	}
+
+	function findDraw() {
 		let counter = 0;
 
-		const draw = field.some((object) => {
+		const draw = state.field.some((object) => {
 			counter++;
 			return object.symbol === '';
 		});
 
-		if (counter >= 9) {
-			return setIsDraw((prev) => !prev);
+		if (counter >= state.field.length) {
+			return state.setIsDraw((prev) => !prev);
 		}
 
 		return draw;
@@ -45,77 +64,29 @@ function FieldContainer(
 			const [a, b, c] = WIN_PATTERNS[i];
 
 			if (
-				field[a].symbol &&
-				field[a].symbol === field[b].symbol &&
-				field[a].symbol === field[c].symbol
+				state.field[a].symbol &&
+				state.field[a].symbol === state.field[b].symbol &&
+				state.field[a].symbol === state.field[c].symbol
 			) {
-				return field[a].symbol;
+				return state.field[a].symbol;
 			}
 		}
-		checkDraw();
-	}
-
-	if (field[index].symbol) return null;
-
-	setField((prev) => {
-		prev[index].symbol = currentPlayer;
-		return [...prev];
-	});
-
-	switch (currentPlayer) {
-		case 'x':
-			setCurrentPlayer((prev) => {
-				if (findWinner('x')) {
-					setIsGameEnded(true);
-					return prev;
-				}
-				return (prev = 'o');
-			});
-			break;
-		case 'o':
-			setCurrentPlayer((prev) => {
-				if (findWinner('o')) {
-					setIsGameEnded(true);
-					return prev;
-				}
-				return (prev = 'x');
-			});
-			break;
-		default: // Ничего не делаем
+		findDraw();
 	}
 }
 
-export const FieldLayout = ({
-	currentPlayer,
-	setCurrentPlayer,
-	field,
-	setField,
-	isGameEnded,
-	setIsGameEnded,
-	isDraw,
-	setIsDraw,
-}) => {
+export const FieldLayout = ({ ...state }) => {
 	return (
 		<div className={s.game}>
 			<div className={s.board}>
 				<div className={s.boardWrapper}>
-					{field.map(({ id, position, symbol }, index) => {
+					{state.field.map(({ id, position, symbol }, index) => {
 						return (
 							<div
 								key={id}
 								className={`${s.square} ${s[position]}`}
 								onClick={(e) => {
-									FieldContainer(
-										field,
-										setField,
-										index,
-										currentPlayer,
-										setCurrentPlayer,
-										isGameEnded,
-										setIsGameEnded,
-										isDraw,
-										setIsDraw,
-									);
+									FieldContainer(state, index);
 								}}
 							>
 								<div className={s[symbol]}></div>

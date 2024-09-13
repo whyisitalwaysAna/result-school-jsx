@@ -4,10 +4,7 @@ import { NewGameLayout } from './components/newGame';
 import { useState } from 'react';
 
 export const AppLayout = () => {
-	const [currentPlayer, setCurrentPlayer] = useState('x');
-	const [isGameEnded, setIsGameEnded] = useState(false);
-	const [isDraw, setIsDraw] = useState(false);
-	const [field, setField] = useState([
+	const fieldInitial = [
 		{ id: '0', position: 'leftTop', symbol: '' },
 		{ id: '1', position: 'centerTop', symbol: '' },
 		{ id: '2', position: 'rightTop', symbol: '' },
@@ -17,31 +14,31 @@ export const AppLayout = () => {
 		{ id: '6', position: 'leftBottom', symbol: '' },
 		{ id: '7', position: 'centerBottom', symbol: '' },
 		{ id: '8', position: 'rightBottom', symbol: '' },
-	]);
+	];
+	const fieldInitialCopy = [...fieldInitial];
+
+	const [currentPlayer, setCurrentPlayer] = useState('x');
+	const [isGameEnded, setIsGameEnded] = useState(false);
+	const [isDraw, setIsDraw] = useState(false);
+	const [field, setField] = useState(fieldInitialCopy);
+
+	const state = {
+		fieldInitial,
+		currentPlayer,
+		setCurrentPlayer,
+		isGameEnded,
+		setIsGameEnded,
+		isDraw,
+		setIsDraw,
+		field,
+		setField,
+	};
 
 	return (
 		<>
-			<NewGameLayout
-				setCurrentPlayer={setCurrentPlayer}
-				setIsGameEnded={setIsGameEnded}
-				setIsDraw={setIsDraw}
-				setField={setField}
-			/>
-			<InformationLayout
-				currentPlayer={currentPlayer}
-				isGameEnded={isGameEnded}
-				isDraw={isDraw}
-			/>
-			<FieldLayout
-				currentPlayer={currentPlayer}
-				setCurrentPlayer={setCurrentPlayer}
-				field={field}
-				setField={setField}
-				isGameEnded={isGameEnded}
-				setIsGameEnded={setIsGameEnded}
-				isDraw={isDraw}
-				setIsDraw={setIsDraw}
-			/>
+			<NewGameLayout {...state} />
+			<InformationLayout {...state} />
+			<FieldLayout {...state} />
 		</>
 	);
 };
