@@ -1,6 +1,10 @@
 import s from './Information.module.css';
-import { InformationContainer } from './InformationContainer';
+import PropTypes from 'prop-types';
 
-export const InformationLayout = ({ ...state }) => {
-	return <div className={s.header}>{InformationContainer(state)}</div>;
+export const InformationLayout = ({ information }) => {
+	return <div className={s.header}>{information}</div>;
+};
+
+InformationLayout.propTypes = {
+	information: PropTypes.string,
 };

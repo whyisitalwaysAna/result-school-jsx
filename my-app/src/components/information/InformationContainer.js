@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
+import { InformationLayout } from './InformationLayout';
 
-export const InformationContainer = (state) => {
-	if (state.isDraw) return `Ничья!`;
+export const InformationContainer = ({ isGameEnded, isDraw, currentPlayer }) => {
+	let information = `Ход игрока (${currentPlayer})`;
 
-	return state.isGameEnded
-		? `Победитель: (${state.currentPlayer})!`
-		: `Ход игрока (${state.currentPlayer})`;
+	if (isGameEnded) {
+		information = `Победитель: (${currentPlayer})!`;
+	} else if (isDraw) {
+		information = `Ничья!`;
+	}
+
+	return <InformationLayout information={information} />;
 };
 
 InformationContainer.propTypes = {

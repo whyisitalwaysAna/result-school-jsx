@@ -3,3 +3,27 @@
 	margin: 0;
 	padding: 0;
 }
+
+.restart {
+	border: 2px solid #fff;
+	cursor: pointer;
+	top: 1.5%;
+	right: 1%;
+	position: absolute;
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
+	font-size: 1.2rem;
+	padding: 5px 10px;
+	transition: all 0.3s;
+	background-color: #000000;
+}
+
+.restart:hover {
+	background-color: #ffffff;
+	color: #000000;
+}
+
+.restart:active {
+	margin-top: 2px;
+}

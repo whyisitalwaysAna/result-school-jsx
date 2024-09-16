@@ -1,20 +1,17 @@
 import s from './Field.module.css';
-import { FieldContainer } from './FieldContainer';
 import PropTypes from 'prop-types';
 
-export const FieldLayout = ({ ...state }) => {
+export const FieldLayout = ({ field, handleSquareClick }) => {
 	return (
 		<div className={s.game}>
 			<div className={s.board}>
 				<div className={s.boardWrapper}>
-					{state.field.map(({ id, position, symbol }, index) => {
+					{field.map(({ position, symbol }, index) => {
 						return (
 							<div
-								key={id}
+								key={index}
 								className={`${s.square} ${s[position]}`}
-								onClick={(e) => {
-									FieldContainer(state, index);
-								}}
+								onClick={() => handleSquareClick(index)}
 							>
 								<div className={s[symbol]}></div>
 							</div>
@@ -28,5 +25,5 @@ export const FieldLayout = ({ ...state }) => {
 
 FieldLayout.propTypes = {
 	field: PropTypes.array,
+	handleSquareClick: PropTypes.func,
 };
-
