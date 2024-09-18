@@ -15,7 +15,7 @@ export const App = () => {
 			getState={getState}
 			handleSubmit={(event) => handleSubmit(event, getState, setError)}
 			handleChange={(event) =>
-				handleChange(event, getState, updateState, sumbitButtonRef)
+				handleChange(event, getState, updateState, sumbitButtonRef, setError)
 			}
 			handleBlur={() => handleBlur(getState, setError)}
 		/>

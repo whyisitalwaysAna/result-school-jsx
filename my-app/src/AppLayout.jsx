@@ -18,7 +18,7 @@ export const AppLayout = ({
 				name='email'
 				value={email}
 				placeholder='Почта'
-				onChange={(event) => handleChange(event)}
+				onChange={(event) => handleChange(event, sumbitButtonRef)}
 				onBlur={handleBlur}
 			/>
 			<input
@@ -26,7 +26,7 @@ export const AppLayout = ({
 				name='password'
 				value={password}
 				placeholder='Пароль'
-				onChange={(event) => handleChange(event)}
+				onChange={(event) => handleChange(event, sumbitButtonRef)}
 				onBlur={handleBlur}
 			/>
 			<input
@@ -34,7 +34,7 @@ export const AppLayout = ({
 				name='repeatPassword'
 				value={repeatPassword}
 				placeholder='Повтор пароля'
-				onChange={(event) => handleChange(event)}
+				onChange={(event) => handleChange(event, sumbitButtonRef)}
 				onBlur={handleBlur}
 			/>
 			<button ref={sumbitButtonRef} type='submit' disabled={error}>
