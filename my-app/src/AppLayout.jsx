@@ -1,43 +1,41 @@
 import s from './App.module.css';
+import { INPUT_LIST } from './constants';
 
 export const AppLayout = ({
-	getState,
-	handleSubmit,
-	handleChange,
-	handleBlur,
 	error,
-	sumbitButtonRef,
+	state,
+	handleChange,
+	handleSubmit,
+	handleBlur,
+	buttonRef,
 }) => {
-	const { email, password, repeatPassword } = getState;
-
 	return (
-		<form onSubmit={(event) => handleSubmit(event)}>
-			{error && <div className={s.error}>{error}</div>}
-			<input
-				type='email'
-				name='email'
-				value={email}
-				placeholder='Почта'
-				onChange={(event) => handleChange(event, sumbitButtonRef)}
-				onBlur={handleBlur}
-			/>
-			<input
-				type='password'
-				name='password'
-				value={password}
-				placeholder='Пароль'
-				onChange={(event) => handleChange(event, sumbitButtonRef)}
-				onBlur={handleBlur}
-			/>
-			<input
-				type='password'
-				name='repeatPassword'
-				value={repeatPassword}
-				placeholder='Повтор пароля'
-				onChange={(event) => handleChange(event, sumbitButtonRef)}
-				onBlur={handleBlur}
-			/>
-			<button ref={sumbitButtonRef} type='submit' disabled={error}>
+		<form className={s.form} onSubmit={(e) => handleSubmit(e)}>
+			{error && <div className={s.error}>{error[0]}</div>}
+			{INPUT_LIST.map((list, index) => {
+				return (
+					<input
+						className={
+							error && error[1] === index
+								? `${s.input} ${s.redBorder}`
+								: s.input
+						}
+						key={list.id}
+						type={list.type}
+						name={list.name}
+						value={state[index].value}
+						placeholder={list.placeholder}
+						onChange={(e) => handleChange(e)}
+						onBlur={() => handleBlur()}
+					></input>
+				);
+			})}
+			<button
+				className={s.submit}
+				type='submit'
+				disabled={error && error.length !== 0}
+				ref={buttonRef}
+			>
 				Зарегистрироваться
 			</button>
 		</form>

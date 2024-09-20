@@ -1,2 +1,2 @@
-export * from './validateInput';
 export * from './sendData';
+export * from './validate';

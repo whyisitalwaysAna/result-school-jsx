@@ -1,23 +1,33 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { AppLayout } from './AppLayout';
-import { handleSubmit, handleChange, handleBlur } from './handlers';
 import { useStore } from './hooks';
+import { sendData, validate } from './utils';
+import { handleChange, handleSubmit, handleBlur } from './handlers';
 
 export const App = () => {
-	const { getState, updateState } = useStore();
-	const [error, setError] = useState(' ');
-	const sumbitButtonRef = useRef(null);
+	const buttonRef = useRef(null);
+	const { state, updateState } = useStore();
+	const [error, setError] = useState(true);
+
+	useEffect(() => {
+		const password = state.find((input) => input.name === 'password');
+		const repeatPassword = state.find((input) => input.name === 'repeatPassword');
+
+		if (password.value === repeatPassword.value) {
+			buttonRef.current.focus();
+		}
+	}, [state]);
 
 	return (
 		<AppLayout
-			sumbitButtonRef={sumbitButtonRef}
 			error={error}
-			getState={getState}
-			handleSubmit={(event) => handleSubmit(event, getState, setError)}
-			handleChange={(event) =>
-				handleChange(event, getState, updateState, sumbitButtonRef, setError)
+			state={state}
+			handleChange={(e) => handleChange(e, updateState)}
+			handleSubmit={(e) =>
+				handleSubmit(e, state, validate, setError, sendData, state)
 			}
-			handleBlur={() => handleBlur(getState, setError)}
+			handleBlur={() => handleBlur(validate, state, setError)}
+			buttonRef={buttonRef}
 		/>
 	);
 };

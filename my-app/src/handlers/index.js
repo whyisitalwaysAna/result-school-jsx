@@ -1,3 +1,3 @@
+export * from './handleBlur';
+export * from './handleChange';
 export * from './handleSubmit';
-export * from './handleChange'
-export * from './handleBlur'

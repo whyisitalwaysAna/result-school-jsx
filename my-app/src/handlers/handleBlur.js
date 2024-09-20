@@ -1,20 +1,12 @@
-export const handleBlur = (getState, setError) => {
-	const values = Object.values(getState);
+import { VALIDATE_RULES, VALIDATE_SCHEMA } from '../constants';
 
-	const isValueEmpty = values.some((value) => {
-		return value === '';
-	});
+export const handleBlur = (validate, state, setError) => {
+	const hasError = validate(state, VALIDATE_SCHEMA, VALIDATE_RULES);
 
-	const emailCorrect = getState.email.includes('@');
-
-	if (!emailCorrect) {
-		setError('Введите корректную почту');
-		return;
-	}
-
+	const isValueEmpty = state.some((input) => input.value === '');
 	if (isValueEmpty) {
-		setError(' ');
+		return;
 	} else {
-		setError(null);
+		setError([...hasError]);
 	}
 };

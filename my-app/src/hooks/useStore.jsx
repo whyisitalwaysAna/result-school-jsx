@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import { initialState } from '../constants';
+import { INPUT_LIST} from '../constants';
 
 export const useStore = () => {
-	const [state, setState] = useState(initialState);
+	const [state, setState] = useState(INPUT_LIST);
 
 	return {
-		getState: state,
+		state: state,
 		updateState: (fieldName, newValue) => {
-			setState({ ...state, [fieldName]: newValue });
+			setState(
+				state.map((input) =>
+					input.name === fieldName ? { ...input, value: newValue } : input,
+				),
+			);
 		},
 	};
 };

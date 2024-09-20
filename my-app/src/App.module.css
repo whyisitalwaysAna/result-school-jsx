@@ -1,3 +1,50 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 40vw;
+	gap: 30px;
+}
+
+.input {
+	border: 1px solid #fff;
+	background-color: rgba(255, 255, 255, 0);
+	height: 45px;
+	border-radius: 4px;
+	color: #fff;
+	font-family: 'Verdana', sans-serif;
+	padding-left: 20px;
+	font-size: 1rem;
+}
+
+.redBorder {
+	border: 2px solid #fc0000;
+}
+
+.submit {
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 4px 4px #0000000e;
+	height: 45px;
+	font-family: 'Verdana', sans-serif;
+	font-size: 1.1rem;
+	color: #2148c0;
+	transition: all 0.1s;
+}
+
+.submit:active {
+	color: #2149c093;
+}
+
+.submit:disabled {
+	background-color: #818181;
+	color: #b6b6b6;
+}
+
 .error {
-	color: red;
+	text-align: center;
+	font-family: 'Verdana', sans-serif;
+	font-size: 1.1rem;
+	color: #ffa600;
 }
