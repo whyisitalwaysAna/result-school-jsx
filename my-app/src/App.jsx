@@ -1,33 +1,47 @@
-import { useState, useRef, useEffect } from 'react';
+// import { AppLayout } from './AppLayout';
+import { useRef, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { FORM_SCHEME } from './constants';
+import { sendData } from './utils';
 import { AppLayout } from './AppLayout';
-import { useStore } from './hooks';
-import { sendData, validate } from './utils';
-import { handleChange, handleSubmit, handleBlur } from './handlers';
 
 export const App = () => {
 	const buttonRef = useRef(null);
-	const { state, updateState } = useStore();
-	const [error, setError] = useState(true);
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			email: '',
+			password: '',
+			repeatPassword: '',
+		},
+		resolver: yupResolver(FORM_SCHEME),
+	});
+
+	const errorEmail = errors.email?.message;
+	const errorPassword = errors.password?.message;
+	const errorRepeatPassword = errors.repeatPassword?.message;
+	const isError = errorEmail || errorPassword || errorRepeatPassword;
 
 	useEffect(() => {
-		const password = state.find((input) => input.name === 'password');
-		const repeatPassword = state.find((input) => input.name === 'repeatPassword');
-
-		if (password.value === repeatPassword.value) {
+		if (!isError) {
 			buttonRef.current.focus();
 		}
-	}, [state]);
+	});
 
-	return (
-		<AppLayout
-			error={error}
-			state={state}
-			handleChange={(e) => handleChange(e, updateState)}
-			handleSubmit={(e) =>
-				handleSubmit(e, state, validate, setError, sendData, state)
-			}
-			handleBlur={() => handleBlur(validate, state, setError)}
-			buttonRef={buttonRef}
-		/>
-	);
+	const props = {
+		handleSubmit,
+		isError,
+		errorEmail,
+		errorPassword,
+		errorRepeatPassword,
+		register,
+		buttonRef,
+	};
+
+	return <AppLayout {...props} handleSubmit={handleSubmit(sendData)} />;
 };

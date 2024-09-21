@@ -1,14 +1,5 @@
-// Simulating sending data to the server
-
-export const sendData = (state) => {
-	const data = state.reduce((acc, object) => {
-		return (acc = {
-			...acc,
-			[object.name]: object.value,
-		});
-	}, {});
-
-	console.log(data);
+export const sendData = (formData) => {
 	alert('Вы успешно зарегестрировались!');
+	console.log(formData);
 	window.location.reload();
 };

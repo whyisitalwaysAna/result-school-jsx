@@ -1,40 +1,44 @@
 import s from './App.module.css';
-import { INPUT_LIST } from './constants';
+import { sendData } from './utils';
 
-export const AppLayout = ({
-	error,
-	state,
-	handleChange,
-	handleSubmit,
-	handleBlur,
-	buttonRef,
-}) => {
+export const AppLayout = (props) => {
 	return (
-		<form className={s.form} onSubmit={(e) => handleSubmit(e)}>
-			{error && <div className={s.error}>{error[0]}</div>}
-			{INPUT_LIST.map((list, index) => {
-				return (
-					<input
-						className={
-							error && error[1] === index
-								? `${s.input} ${s.redBorder}`
-								: s.input
-						}
-						key={list.id}
-						type={list.type}
-						name={list.name}
-						value={state[index].value}
-						placeholder={list.placeholder}
-						onChange={(e) => handleChange(e)}
-						onBlur={() => handleBlur()}
-					></input>
-				);
-			})}
+		<form
+			className={s.form}
+			onSubmit={(e) => {
+				e.preventDefault();
+				props.handleSubmit(sendData);
+			}}
+		>
+			{props.isError && <div className={s.error}>{props.isError}</div>}
+			<input
+				className={props.errorEmail ? `${s.input} ${s.redBorder}` : s.input}
+				type='email'
+				name='email'
+				placeholder='Почта'
+				{...props.register('email')}
+			></input>
+			<input
+				className={props.errorPassword ? `${s.input} ${s.redBorder}` : s.input}
+				type='password'
+				name='password'
+				placeholder='Пароль'
+				{...props.register('password')}
+			></input>
+			<input
+				className={
+					props.errorRepeatPassword ? `${s.input} ${s.redBorder}` : s.input
+				}
+				type='password'
+				name='repeatPassword'
+				placeholder='Повторите пароль'
+				{...props.register('repeatPassword')}
+			></input>
 			<button
+				ref={props.buttonRef}
 				className={s.submit}
 				type='submit'
-				disabled={error && error.length !== 0}
-				ref={buttonRef}
+				disabled={!!props.isError}
 			>
 				Зарегистрироваться
 			</button>
