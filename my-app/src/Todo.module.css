@@ -1,0 +1,170 @@
+.todoAppContainer {
+	font-family: 'Rubik', sans-serif;
+	height: 100vh;
+	width: 55vw;
+	padding-top: 65px;
+	--blue-color: #29abe2;
+	--grey-color: #b4b4b4;
+}
+
+h1 {
+	font-weight: 700;
+	font-size: 3rem;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.searchFormContainer {
+	display: flex;
+	gap: 12px;
+	height: 48px;
+	margin-bottom: 85px;
+}
+
+.searchLabel {
+	position: relative;
+	width: calc(100% - 110px);
+}
+
+.searchInput {
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.2rem;
+	padding: 12px;
+	border: 1px solid var(--grey-color);
+	color: var(--grey-color);
+	border-radius: 10px;
+	height: 100%;
+	width: 100%;
+}
+
+.searchInput:focus {
+	border-color: var(--blue-color);
+	color: black;
+}
+
+.searchIcon {
+	fill: var(--grey-color);
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	right: 12px;
+	top: 12px;
+}
+
+.sortAlphabet {
+	cursor: pointer;
+	font-family: 'Rubik', sans-serif;
+	width: 48px;
+	height: 48px;
+	border: 1px solid var(--grey-color);
+	background-color: #fff;
+	font-weight: 500;
+	font-size: 2rem;
+	border-radius: 10px;
+}
+
+.switchTheme {
+	cursor: pointer;
+	width: 48px;
+	height: 48px;
+	border: 1px solid var(--grey-color);
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+.moonIcon {
+	width: 30px;
+	height: 30px;
+}
+
+.loading {
+	font-family: 'Rubik', sans-serif;
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+.todosFormConainer {
+	margin: 0 auto;
+	max-width: 865px;
+}
+
+.todoContainer {
+	display: flex;
+	gap: 10px;
+	padding: 10px;
+	border-bottom: 1px solid var(--grey-color);
+	align-items: center;
+}
+
+.todoLabel {
+	display: flex;
+	flex-basis: 100%;
+	position: relative;
+	align-items: center;
+	gap: 10px;
+	font-size: 1.4rem;
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+}
+.todoCheckbox {
+	position: relative;
+	min-height: 38px;
+	min-width: 38px;
+	border: 3px solid var(--grey-color);
+	border-radius: 10px;
+	transition: all 0.2s;
+}
+
+.todoLabel:hover input ~ .todoCheckbox {
+	border-color: var(--blue-color);
+}
+
+.todoLabel input:checked ~ .todoCheckbox {
+	background-color: var(--blue-color);
+	border-color: var(--blue-color);
+}
+
+.todoCheckbox:after {
+	content: '';
+	position: absolute;
+	display: none;
+}
+
+.todoLabel input:checked ~ .todoCheckbox:after {
+	display: block;
+}
+
+.todoLabel .todoCheckbox:after {
+	left: 8px;
+	top: 0px;
+	width: 11px;
+	height: 21px;
+	border: solid white;
+	border-radius: 4px;
+	border-width: 0 5px 5px 0;
+	transform: rotate(45deg);
+}
+
+.pencilIcon {
+	min-width: 24px;
+	min-height: 24px;
+}
+
+.trashIcon {
+	min-width: 23px;
+	min-height: 23px;
+}
+
+@media (max-width: 800px) {
+	.todoAppContainer {
+		width: 90vw;
+	}
+	.searchIcon {
+		display: none;
+	}
+}
