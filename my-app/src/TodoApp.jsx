@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
-import { TodoLayout } from './TodoLayout';
+import { TodoAppLayout } from './TodoAppLayout';
+import { fetchTodos } from './shared';
+import { DB_URL } from './shared';
 
 export const TodoApp = () => {
-	const [todos, setTodos] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const [todosData, setTodosData] = useState([]);
+	const [loadingFlag, setLoadingFlag] = useState(false);
+	const [editedFieldId, setEditedFieldId] = useState('');
 
 	useEffect(() => {
-		setIsLoading(true);
+		fetchTodos(DB_URL, setTodosData, 'Response from database received with an error');
+		setLoadingFlag(false);
+	}, [loadingFlag]);
 
-		fetch('https://jsonplaceholder.typicode.com/todos')
-			.then((response) => response.json())
-			.then((json) => setTodos(json.filter((o, index) => index < 20)))
-			.finally(() => setIsLoading(false));
-	}, []);
-
-	return <TodoLayout isLoading={isLoading} todos={todos} />;
+	return (
+		<TodoAppLayout
+			setTodosData={setTodosData}
+			setLoadingFlag={setLoadingFlag}
+			todosData={todosData}
+			editedFieldId={editedFieldId}
+			setEditedFieldId={setEditedFieldId}
+		/>
+	);
 };

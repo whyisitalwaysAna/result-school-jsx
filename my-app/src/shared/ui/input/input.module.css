@@ -1,0 +1,15 @@
+.input {
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.2rem;
+	padding: 12px;
+	border: 1px solid var(--grey-color);
+	color: var(--grey-color);
+	border-radius: 10px;
+	height: 100%;
+	width: 100%;
+}
+
+.input:focus {
+	border-color: var(--blue-color);
+	color: var(--black-color);
+}

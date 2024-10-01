@@ -1,0 +1,12 @@
+.button {
+	font-family: 'Rubik', sans-serif;
+	font-weight: 600;
+	font-size: 1.5rem;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: all 0.2s;
+}
+
+.button:hover {
+	border: 1px solid var(--blue-color);
+}

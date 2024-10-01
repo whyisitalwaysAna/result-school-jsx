@@ -1,0 +1,35 @@
+.container {
+	gap: 10px;
+	overflow: scroll;
+	display: flex;
+	text-align: center;
+	justify-content: space-between;
+	padding: 10px;
+	border-bottom: 1px solid var(--grey-color);
+	align-items: center;
+}
+
+.text {
+	padding: 0px 0px 0px 5px;
+	min-height: 34px;
+	width: 100%;
+	border: 1px solid var(--grey-color);
+	border-radius: 10px;
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.4rem;
+}
+
+.text:focus {
+	border-color: var(--blue-color);
+}
+
+.checkmark {
+	cursor: pointer;
+	min-width: 22px;
+	min-height: 24px;
+	transition: all 0.2s;
+}
+
+.checkmarkIcon:hover {
+	fill: var(--blue-color);
+}
