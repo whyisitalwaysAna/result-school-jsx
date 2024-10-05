@@ -24,7 +24,13 @@ export const InputField = ({ setTodosData, setLoadingFlag }) => {
 	};
 
 	useEffect(() => {
-		fetchTodos(`${DB_URL}?q=${todoTitle}`, setTodosData, 'Failed to search todo');
+		fetchTodos(`${DB_URL}?q=${todoTitle}`)
+			.then((data) => {
+				setTodosData(data);
+			})
+			.catch((error) =>
+				console.error(`${'Failed to search todo'}: ${error.message}`),
+			);
 	}, [todoTitle]);
 
 	return (

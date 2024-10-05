@@ -18,6 +18,9 @@ export const EditingWindowLayout = ({
 				checked={isChecked}
 				value={newFieldTitle}
 				onChange={handleChange}
+				onKeyPress={(e) => {
+					if (e.key === 'Enter') handleChangeTitleClick(e)
+				}}
 			/>
 			<ImCheckmark className={styles.checkmark} onClick={handleChangeTitleClick} />
 		</div>

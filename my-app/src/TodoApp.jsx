@@ -9,7 +9,16 @@ export const TodoApp = () => {
 	const [editedFieldId, setEditedFieldId] = useState('');
 
 	useEffect(() => {
-		fetchTodos(DB_URL, setTodosData, 'Response from database received with an error');
+		fetchTodos(DB_URL)
+			.then((data) => {
+				setTodosData(data);
+			})
+			.catch((error) =>
+				console.error(
+					`${'Response from database received with an error'}: ${error.message}`,
+				),
+			);
+
 		setLoadingFlag(false);
 	}, [loadingFlag]);
 

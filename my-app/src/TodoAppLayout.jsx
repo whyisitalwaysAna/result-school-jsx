@@ -14,10 +14,7 @@ export const TodoAppLayout = ({
 			<h1>Things to do</h1>
 			<nav className={s.navigation}>
 				<InputField setTodosData={setTodosData} setLoadingFlag={setLoadingFlag} />
-				<SortAlphabetically
-					setLoadingFlag={setLoadingFlag}
-					setTodosData={setTodosData}
-				/>
+				<SortAlphabetically setTodosData={setTodosData} />
 			</nav>
 			<form className={s.todosFormConainer}>
 				{todosData.length === 0 ? (

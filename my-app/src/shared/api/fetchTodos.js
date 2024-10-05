@@ -1,8 +1,9 @@
-export const fetchTodos = (URL, setter, errorMessage) => {
-	fetch(URL)
-		.then((response) => response.json())
-		.then((data) => {
-			setter(data);
+export const fetchTodos = async (URL) => {
+	return fetch(URL)
+		.then((response) => {
+			return response.json();
 		})
-		.catch((error) => console.error(`${errorMessage}: ${error.message}`));
+		.then((data) => {
+			return data;
+		});
 };
