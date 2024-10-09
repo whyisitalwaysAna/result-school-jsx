@@ -9,38 +9,6 @@
 	--black-color: #000;
 }
 
-.navigation {
-	display: flex;
-	gap: 12px;
-	margin-bottom: 85px;
-}
-
-h1 {
-	font-weight: 700;
-	font-size: 3rem;
-	margin-bottom: 30px;
-	text-align: center;
-}
-
-.todosFormConainer {
-	margin: 0 auto;
-	max-width: 865px;
-}
-
-.emptyListIcon {
-	width: 100%;
-	text-align: center;
-	img {
-		width: 350px;
-		height: 350px;
-	}
-	span {
-		display: block;
-		font-family: 'Rubik', sans-serif;
-		font-size: 1.5rem;
-	}
-}
-
 @media (max-width: 800px) {
 	.todoAppContainer {
 		width: 90vw;

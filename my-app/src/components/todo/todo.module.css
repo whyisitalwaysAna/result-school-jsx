@@ -1,0 +1,81 @@
+.todoContainer {
+	display: flex;
+	text-align: center;
+	gap: 10px;
+	padding: 10px;
+	border-bottom: 1px solid var(--grey-color);
+	align-items: center;
+}
+
+.todoLabel {
+	overflow: hidden;
+	white-space: nowrap;
+	display: flex;
+	flex-basis: 100%;
+	position: relative;
+	align-items: center;
+	gap: 10px;
+	font-size: 1.4rem;
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+}
+
+.customCheckbox {
+	position: relative;
+	min-height: 34px;
+	min-width: 34px;
+	border: 3px solid var(--grey-color);
+	border-radius: 10px;
+	transition: all 0.2s;
+}
+
+.title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.checkedTitle {
+	text-decoration: line-through;
+	color: var(--grey-color);
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.todoLabel input:checked ~ .customCheckbox {
+	background-color: var(--blue-color);
+	border-color: var(--blue-color);
+}
+
+.customCheckbox:after {
+	content: '';
+	position: absolute;
+	display: none;
+}
+
+.customCheckbox:hover {
+	border-color: var(--blue-color);
+}
+
+.todoLabel input:checked ~ .customCheckbox:after {
+	display: block;
+}
+
+.todoLabel .customCheckbox:after {
+	left: 8px;
+	width: 8px;
+	height: 18px;
+	border: solid var(--white-color);
+	border-radius: 4px;
+	border-width: 0 5px 5px 0;
+	transform: rotate(45deg);
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}

@@ -1,0 +1,107 @@
+h1 {
+	font-weight: 700;
+	font-size: 3rem;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.navMain {
+	display: flex;
+	gap: 12px;
+	margin-bottom: 85px;
+}
+
+.navFormContainer {
+	display: flex;
+	gap: 12px;
+	height: 48px;
+	width: 100%;
+}
+
+.navLabel {
+	position: relative;
+	width: 100%;
+}
+
+.navInput {
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.2rem;
+	padding: 12px;
+	border: 1px solid var(--grey-color);
+	color: var(--grey-color);
+	border-radius: 10px;
+	height: 100%;
+	width: 100%;
+}
+
+.navInput:focus {
+	border-color: var(--blue-color);
+	color: var(--black-color);
+}
+
+.navGlass {
+	fill: var(--grey-color);
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	right: 12px;
+	top: 12px;
+}
+
+.navButton {
+	font-family: 'Rubik', sans-serif;
+	font-weight: 600;
+	font-size: 1.5rem;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: all 0.2s;
+	width: 210px;
+	height: 48px;
+	border: 1px solid var(--grey-color);
+	background-color: var(--white-color);
+}
+
+.navButton:hover {
+	border: 1px solid var(--blue-color);
+}
+
+.sortTodos {
+	cursor: pointer;
+	width: 48px;
+	height: 48px;
+	padding: 7px;
+	background-color: var(--white-color);
+	border: 1px solid var(--grey-color);
+	border-radius: 10px;
+}
+
+.sortTodosActive {
+	background-color: var(--blue-color);
+	border-color: var(--blue-color);
+	.sortTodosIcon {
+		fill: var(--white-color);
+	}
+}
+
+.sortTodos:hover {
+	border: 1px solid var(--blue-color);
+}
+
+.sortTodosIcon {
+	width: 100%;
+	height: 100%;
+}
+
+.todosFormConainer {
+	margin: 0 auto;
+	max-width: 865px;
+}
+
+@media (max-width: 800px) {
+	.formButton {
+		font-size: 1.2rem;
+	}
+	.glass {
+		display: none;
+	}
+}

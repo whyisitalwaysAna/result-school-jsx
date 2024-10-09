@@ -1,3 +1,19 @@
 {
-	"todos": []
+  "todos": [
+    {
+      "id": 1728399202225,
+      "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "checked": true
+    },
+    {
+      "id": 1728399280843,
+      "title": " Aenean egestas vestibulum mi eu blandit. Duis dignissim, erat quis tincidunt auctor, mauris mi venenatis enim, in dictum metus neque et.",
+      "checked": false
+    },
+    {
+      "id": 1728399297120,
+      "title": "Phasellus consectetur venenatis lacinia. Vivamus pretium ante vulputate dictum dapibus. Donec id tortor eu orci condimentum sollicitudin sed id nibh. Praesent a pretium arcu. Integer egestas enim in sapien dapibus, non luctus lectus laoreet. Donec at blandit erat, eu commodo nibh.",
+      "checked": false
+    }
+  ]
 }

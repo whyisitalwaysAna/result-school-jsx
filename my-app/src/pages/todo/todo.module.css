@@ -1,0 +1,49 @@
+.container {
+	display: flex;
+	text-align: center;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navigation {
+	display: flex;
+	gap: 20px;
+	margin-bottom: 30px;
+	justify-content: center;
+	align-items: center;
+}
+
+.text {
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.4rem;
+	text-align: left;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid var(--grey-color);
+	border-radius: 10px;
+	outline: none;
+}
+
+
+.text:focus {
+	border-color: var(--blue-color);
+}
+
+.text:focus {
+	border-color: var(--blue-color);
+}
+
+.pencil,
+.trash,
+.checkmark {
+	cursor: pointer;
+	min-width: 27px;
+	min-height: 27px;
+	transition: all 0.2s;
+}
+
+.pencil:hover,
+.trash:hover,
+.checkmark:hover {
+	fill: var(--blue-color);
+}
