@@ -45,8 +45,8 @@ export const MainLayout = ({
 							: styles.sortTodos
 					}
 					onClick={() => {
-						setSortFlag(!sortFlag);
-						sortTodos(sortFlag, setTodosData);
+						setSortFlag((prev) => !prev);
+						sortTodos(!sortFlag, setTodosData);
 					}}
 				>
 					<FaSortAlphaDown className={styles.sortTodosIcon} />
@@ -63,6 +63,8 @@ export const MainLayout = ({
 								checked={checked}
 								title={title}
 								setLoadingFlag={setLoadingFlag}
+								sortFlag={sortFlag}
+								// setTodosData={setTodosData}
 								key={id}
 							/>
 						);

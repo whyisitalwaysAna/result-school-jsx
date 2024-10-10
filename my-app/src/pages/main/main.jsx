@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { DB_URLS } from '../../constants';
 import { readData } from '../../api';
 import { MainLayout } from './mainLayout';
+import { sortTodos } from '../../utils';
 
 export const Main = () => {
 	const [todosData, setTodosData] = useState([]);
@@ -24,6 +25,11 @@ export const Main = () => {
 	useEffect(() => {
 		readData(DB_URLS.MAIN)
 			.then((data) => {
+				if (sortFlag) {
+					sortTodos(sortFlag, setTodosData);
+					return;
+				}
+
 				setTodosData(data);
 			})
 			.catch((error) =>

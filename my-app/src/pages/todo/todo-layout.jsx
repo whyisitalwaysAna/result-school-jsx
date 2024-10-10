@@ -14,8 +14,7 @@ export const TodoLayout = ({ navigate, isEdit, setIsEdit, id, title, setTitle })
 					<ImCheckmark
 						className={styles.checkmark}
 						onClick={(e) => {
-							setIsEdit(true);
-							updateTodo(e, id, title);
+							updateTodo(e, id, title, setIsEdit);
 						}}
 					/>
 				) : (

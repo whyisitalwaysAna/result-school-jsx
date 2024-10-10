@@ -10,6 +10,8 @@ export const checkTodo = (e, id, checked, setLoadingFlag) => {
 			checked: !checked,
 		}),
 	})
-		.then(setLoadingFlag(true))
+		.then(() => {
+			setLoadingFlag(true);
+		})
 		.catch((error) => console.error(`Failed to check todo: ${error.message}`));
 };

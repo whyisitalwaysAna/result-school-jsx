@@ -1,11 +1,11 @@
 import { DB_URLS } from '../constants';
+import { readData } from '../api';
 
-export const sortTodos = (sortedFlag, setTodosData) => {
+export const sortTodos = (sortFlag, setTodosData) => {
 	const { MAIN, SORT_ASC, SORT_DESC } = DB_URLS;
-	const sortOrder = sortedFlag ? SORT_DESC : SORT_ASC;
+	const sortOrder = sortFlag ? SORT_ASC : SORT_DESC;
 
-	fetch(`${MAIN}${sortOrder}`)
-		.then((response) => response.json())
+	readData(`${MAIN}${sortOrder}`)
 		.then((data) => {
 			setTodosData(data);
 		})

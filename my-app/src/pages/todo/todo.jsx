@@ -19,7 +19,6 @@ export const Todo = () => {
 					return;
 				} else {
 					setTitle(data.title);
-					setIsEdit(false);
 				}
 			})
 			.catch((error) =>
@@ -27,7 +26,7 @@ export const Todo = () => {
 					`${'Response from database received with an error'}: ${error.message}`,
 				),
 			);
-	}, [id, navigate]);
+	}, [id, navigate, isEdit]);
 
 	const props = {
 		navigate,
