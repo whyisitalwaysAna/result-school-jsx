@@ -1,15 +1,11 @@
 import { EditingWindowLayout } from '../';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { DB_URL, changeTodos } from '../../shared';
+import { AppContext } from '../../context';
 
-export const EditingWindow = ({
-	editedFieldId,
-	checked,
-	setLoadingFlag,
-	setEditedFieldId,
-	...props
-}) => {
+export const EditingWindow = ({ checked, ...props }) => {
 	const [newTitle, setNewTitle] = useState('');
+	const { editedFieldId, setLoadingFlag, setEditedFieldId } = useContext(AppContext);
 
 	const changeTodoTitleInDatabase = (e) => {
 		e.preventDefault();

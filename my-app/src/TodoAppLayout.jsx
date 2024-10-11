@@ -3,18 +3,15 @@ import { SortAlphabetically } from './features';
 import { InputField, Todo, EditingWindow } from './widgets';
 
 export const TodoAppLayout = ({
-	setTodosData,
-	setLoadingFlag,
 	todosData,
 	editedFieldId,
-	setEditedFieldId,
 }) => {
 	return (
 		<div className={s.todoAppContainer}>
 			<h1>Things to do</h1>
 			<nav className={s.navigation}>
-				<InputField setTodosData={setTodosData} setLoadingFlag={setLoadingFlag} />
-				<SortAlphabetically setTodosData={setTodosData} />
+				<InputField />
+				<SortAlphabetically />
 			</nav>
 			<form className={s.todosFormConainer}>
 				{todosData.length === 0 ? (
@@ -32,18 +29,10 @@ export const TodoAppLayout = ({
 								id={id}
 								isChecked={checked}
 								title={title}
-								setLoadingFlag={setLoadingFlag}
-								setEditedFieldId={setEditedFieldId}
 								key={id}
 							/>
 						) : (
-							<EditingWindow
-								key={editedFieldId}
-								editedFieldId={editedFieldId}
-								isChecked={checked}
-								setLoadingFlag={setLoadingFlag}
-								setEditedFieldId={setEditedFieldId}
-							/>
+							<EditingWindow isChecked={checked} key={editedFieldId} />
 						);
 					})
 				)}

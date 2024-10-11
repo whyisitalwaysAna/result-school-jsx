@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { InputFieldLayout } from '../';
 import { DB_URL, changeTodos, fetchTodos } from '../../shared';
+import { AppContext } from '../../context';
 
-export const InputField = ({ setTodosData, setLoadingFlag }) => {
+export const InputField = () => {
 	const [todoTitle, setTodoTitle] = useState('');
+	const { setTodosData, setLoadingFlag } = useContext(AppContext);
 
 	const addTodoToDatabase = (e) => {
 		e.preventDefault();

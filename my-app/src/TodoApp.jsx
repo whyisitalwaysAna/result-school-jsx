@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { TodoAppLayout } from './TodoAppLayout';
 import { fetchTodos } from './shared';
 import { DB_URL } from './shared';
+import { AppContext } from './context';
 
 export const TodoApp = () => {
 	const [todosData, setTodosData] = useState([]);
@@ -22,13 +23,16 @@ export const TodoApp = () => {
 		setLoadingFlag(false);
 	}, [loadingFlag]);
 
+	const value = {
+		setTodosData,
+		setLoadingFlag,
+		editedFieldId,
+		setEditedFieldId,
+	};
+
 	return (
-		<TodoAppLayout
-			setTodosData={setTodosData}
-			setLoadingFlag={setLoadingFlag}
-			todosData={todosData}
-			editedFieldId={editedFieldId}
-			setEditedFieldId={setEditedFieldId}
-		/>
+		<AppContext.Provider value={value}>
+			<TodoAppLayout todosData={todosData} editedFieldId={editedFieldId} />
+		</AppContext.Provider>
 	);
 };

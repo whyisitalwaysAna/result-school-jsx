@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styles from './sort-alphabetically.module.css';
 import { FaSortAlphaDown } from 'react-icons/fa';
 import { Button, fetchTodos } from '../../shared';
 import { DB_URL, SORT_ASC, SORT_DESC } from '../../shared/constants';
+import { AppContext } from '../../context';
 
-export const SortAlphabetically = ({ setTodosData }) => {
+export const SortAlphabetically = () => {
 	const [sortedFlag, setSortedFlag] = useState(false);
+	const { setTodosData } = useContext(AppContext);
 	const sortOrder = sortedFlag ? SORT_DESC : SORT_ASC;
 
 	const sortDataAlphabetically = () => {

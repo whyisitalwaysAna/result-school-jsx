@@ -1,14 +1,11 @@
+import { useContext } from 'react';
 import { TodoLayout } from '../';
 import { DB_URL, changeTodos } from '../../shared';
+import { AppContext } from '../../context';
 
-export const Todo = ({
-	id,
-	isChecked,
-	title,
-	setLoadingFlag,
-	setEditedFieldId,
-	...props
-}) => {
+export const Todo = ({ id, isChecked, title, ...props }) => {
+	const { setLoadingFlag, setEditedFieldId } = useContext(AppContext);
+
 	const checkTodoInDatabase = (e) => {
 		e.preventDefault();
 
