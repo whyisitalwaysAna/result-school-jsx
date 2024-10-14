@@ -1,7 +1,9 @@
-export const findDraw = (field, setIsDraw) => {
+export const findDraw = (field) => {
 	const isSquareEmpty = field.some((object) => {
 		return object.symbol === '';
 	});
 
-	if (!isSquareEmpty) setIsDraw((prev) => !prev);
+	if (!isSquareEmpty) return true;
+
+	return false;
 };

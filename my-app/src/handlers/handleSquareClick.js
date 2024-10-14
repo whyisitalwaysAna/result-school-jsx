@@ -1,44 +1,9 @@
-import { findDraw, findWinner } from '../utils';
+import { store } from '../reducer';
 
-export const handleSquareClick = (state, index) => {
-	const {
-		isGameEnded,
-		isDraw,
-		setIsDraw,
-		field,
-		setField,
-		currentPlayer,
-		setCurrentPlayer,
-		setIsGameEnded,
-	} = state;
+export const handleSquareClick = (index) => {
+	const { isGameOver, isDraw, field } = store.getState();
 
-	if (isGameEnded || isDraw || field[index].symbol) return;
+	if (isGameOver || isDraw || field[index].symbol) return;
 
-	// Рендер Х и О по клику
-	setField((prev) => {
-		prev[index].symbol = currentPlayer;
-		return [...prev];
-	});
-
-	switch (currentPlayer) {
-		case 'x':
-			setCurrentPlayer((player) => {
-				if (findWinner(field) || findDraw(field, setIsDraw)) {
-					setIsGameEnded(true);
-					return player;
-				}
-				return (player = 'o');
-			});
-			break;
-		case 'o':
-			setCurrentPlayer((player) => {
-				if (findWinner(field) || findDraw(field, setIsDraw)) {
-					setIsGameEnded(true);
-					return player;
-				}
-				return (player = 'x');
-			});
-			break;
-		default: // Ничего не делаем
-	}
+	store.dispatch({ type: 'SET_CURRENT_PLAYER', payload: index });
 };

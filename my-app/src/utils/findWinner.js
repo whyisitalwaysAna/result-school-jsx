@@ -12,4 +12,6 @@ export const findWinner = (field) => {
 			return field[a].symbol;
 		}
 	}
+
+	return false;
 };

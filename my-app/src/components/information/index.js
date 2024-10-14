@@ -1,1 +1,1 @@
-export * from './InformationContainer';
+export * from './Information';

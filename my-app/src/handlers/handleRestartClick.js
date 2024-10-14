@@ -1,6 +1,5 @@
-export const handleRestartClick = (state) => {
-	state.setCurrentPlayer('x');
-	state.setIsGameEnded(false);
-	state.setIsDraw(false);
-	state.setField(state.createEmptyField());
+import { store } from '../reducer';
+
+export const handleRestartClick = () => {
+	store.dispatch({ type: 'SET_NEW_GAME' });
 };
