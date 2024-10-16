@@ -1,9 +1,18 @@
 import s from './Information.module.css';
-import { store } from '../../reducer';
+import { useSelector } from 'react-redux';
 import { findWinner } from '../../utils';
+import {
+	selectCurrentPlayer,
+	selectField,
+	selectGameDraw,
+	selectGameOver,
+} from '../../selectors';
 
 export const Information = () => {
-	const { currentPlayer, isGameOver, isDraw, field } = store.getState();
+	const field = useSelector(selectField);
+	const currentPlayer = useSelector(selectCurrentPlayer);
+	const isGameOver = useSelector(selectGameOver);
+	const isDraw = useSelector(selectGameDraw);
 
 	let information = `Ход игрока (${currentPlayer})`;
 

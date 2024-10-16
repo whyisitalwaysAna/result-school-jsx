@@ -1,25 +1,35 @@
 import s from './Field.module.css';
-import { store } from '../../reducer';
-import { handleSquareClick } from '../../handlers';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectField, selectGameDraw, selectGameOver } from '../../selectors';
 import { findDraw, findWinner } from '../../utils';
+import { setCurrentPlayer, SET_GAME_DRAW, SET_GAME_OVER } from '../../actions';
 import { useEffect } from 'react';
 
 export const Field = () => {
-	const { field } = store.getState();
+	const field = useSelector(selectField);
+	const isDraw = useSelector(selectGameDraw);
+	const isGameOver = useSelector(selectGameOver);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (findWinner(field)) {
-			store.dispatch({ type: 'SET_GAME_OVER' });
+			dispatch(SET_GAME_OVER);
 
 			return () => findWinner(field);
 		}
 
 		if (findDraw(field)) {
-			store.dispatch({ type: 'SET_GAME_DRAW' });
+			dispatch(SET_GAME_DRAW);
 
 			return () => findDraw(field);
 		}
-	}, [field]);
+	}, [field, dispatch]);
+
+	const handleSquareClick = (index) => {
+		if (isGameOver || isDraw || field[index].symbol) return;
+
+		dispatch(setCurrentPlayer(index));
+	};
 
 	return (
 		<div className={s.game}>

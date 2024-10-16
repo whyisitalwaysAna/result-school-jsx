@@ -1,5 +1,4 @@
 import { createEmptyField } from './utils';
-import { createStore } from 'redux';
 
 const initialState = {
 	field: createEmptyField(),
@@ -8,7 +7,7 @@ const initialState = {
 	isDraw: false,
 };
 
-const appReducer = (state = initialState, action) => {
+export const appReducer = (state = initialState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
@@ -40,5 +39,3 @@ const appReducer = (state = initialState, action) => {
 			return state;
 	}
 };
-
-export const store = createStore(appReducer);
